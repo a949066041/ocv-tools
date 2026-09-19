@@ -1,0 +1,30 @@
+{
+  "baseCandidates": [
+    "origin/master",
+    "origin/main"
+  ],
+  "branches": "feat/*",
+  "maxAgeDays": 14,
+  "maxBranches": 10,
+  "maxFiles": 100,
+  "concurrency": 2,
+  "reportInRepo": ".code-review",
+  "agent": {
+    "bin": "omp",
+    "model": "",
+    "timeoutMinutes": 40,
+    "extraArgs": []
+  },
+  "pr": {
+    "giteeTokenEnv": "giteeTokenEnv",
+    "githubTokenEnv": "GITHUB_TOKEN"
+  },
+  "repos": [
+    {
+      "name": "web",
+      "path": "path",
+      "pr": "gitee",
+      "enabled": false
+    }
+  ]
+}

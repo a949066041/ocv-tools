@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
+    <title>ocv 控制台</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>ocv 控制台</h1>
+        <p class="sub" id="paths"></p>
+      </div>
+      <div class="actions">
+        <button id="save" class="primary">保存配置</button>
+        <button id="open-reports">报告目录</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <div class="panel-head">
+          <h2>仓库 <span class="count" id="repo-count"></span></h2>
+          <button id="add-repo">添加仓库</button>
+        </div>
+        <div class="table-wrap"><table id="repos"></table></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>全局设置</h2></div>
+        <div id="settings" class="settings"></div>
+      </section>
+
+      <section class="panel wide">
+        <div class="panel-head">
+          <h2>运行 <span id="run-state" class="tag"></span></h2>
+          <div class="actions">
+            <input id="f-repo" placeholder="仓库过滤 (glob)" />
+            <input id="f-branch" placeholder="分支过滤 (glob)" />
+            <label class="chk"><input type="checkbox" id="f-force" /> 强制重跑</label>
+            <button id="dry">试跑（dry-run）</button>
+            <button id="run" class="primary">立即运行</button>
+            <button id="cancel" class="danger">中止</button>
+          </div>
+        </div>
+        <pre id="log"></pre>
+      </section>
+
+      <section class="panel wide">
+        <div class="panel-head">
+          <h2>最近状态</h2>
+          <button id="refresh">刷新</button>
+        </div>
+        <div class="table-wrap"><table id="status"></table></div>
+      </section>
+    </main>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

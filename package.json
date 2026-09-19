@@ -1,0 +1,15 @@
+{
+  "name": "ocv-agent",
+  "private": true,
+  "description": "夜间 feature 分支 OCR 代码审查 + 自动修复 + 提 PR；Electron 控制台",
+  "main": "app/main.js",
+  "scripts": {
+    "app": "electron .",
+    "ocv": "bun run src/ocv.ts",
+    "postinstall": "install-electron",
+    "setup:electron": "ELECTRON_MIRROR=https://npmmirror.com/mirrors/electron/ install-electron"
+  },
+  "devDependencies": {
+    "electron": "^44.4.2"
+  }
+}
