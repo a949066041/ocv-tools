@@ -8,6 +8,13 @@ contextBridge.exposeInMainWorld("ocv", {
   run: (args) => ipcRenderer.invoke("ocv:run", args),
   cancel: () => ipcRenderer.invoke("ocv:cancel"),
   open: (what) => ipcRenderer.invoke("ocv:open", what),
+  pickFolder: () => ipcRenderer.invoke("ocv:pick-folder"),
+  checkEnv: () => ipcRenderer.invoke("ocv:check-env"),
+  ocrInstall: () => ipcRenderer.invoke("ocv:ocr-install"),
+  ocrCheck: () => ipcRenderer.invoke("ocv:ocr-check"),
+  keepAwake: (on) => ipcRenderer.invoke("ocv:keep-awake", on),
+  branches: (repoPath) => ipcRenderer.invoke("ocv:branches", repoPath),
+  updateCheck: () => ipcRenderer.invoke("ocv:update-check"),
   onOutput: (cb) => ipcRenderer.on("ocv:out", (_e, text) => cb(text)),
   onDone: (cb) => ipcRenderer.on("ocv:done", (_e, code) => cb(code)),
 });

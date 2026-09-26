@@ -1,15 +1,60 @@
 {
   "name": "ocv-agent",
+  "version": "0.1.0",
   "private": true,
   "description": "夜间 feature 分支 OCR 代码审查 + 自动修复 + 提 PR；Electron 控制台",
+  "author": "a949066041",
   "main": "app/main.js",
   "scripts": {
-    "app": "electron .",
-    "ocv": "bun run src/ocv.ts",
-    "postinstall": "install-electron",
-    "setup:electron": "ELECTRON_MIRROR=https://npmmirror.com/mirrors/electron/ install-electron"
+    "app": "bun run build:renderer && electron .",
+    "build:renderer": "vite build",
+    "dev:renderer": "vite",
+    "ocv": "bun run src/cli.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p renderer/tsconfig.json",
+    "check": "bun run typecheck && bun test",
+    "dist": "bun run build:renderer && electron-builder --mac --publish never",
+    "release": "./scripts/release.sh"
   },
   "devDependencies": {
-    "electron": "^44.4.2"
+    "@types/bun": "^1.4.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "electron": "^44.4.2",
+    "electron-builder": "^26.15.3",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.0"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
+  },
+  "build": {
+    "appId": "com.a949066041.ocv",
+    "productName": "ocv",
+    "asar": false,
+    "files": [
+      "app/**/*",
+      "src/**/*",
+      "build/icon.png",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        "zip"
+      ],
+      "icon": "build/icon.png",
+      "identity": null,
+      "category": "public.app-category.developer-tools"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "a949066041",
+        "repo": "ocv-tools"
+      }
+    ]
   }
 }

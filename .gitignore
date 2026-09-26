@@ -1,6 +1,11 @@
 node_modules/
+dist/
+app/dist/
+.DS_Store
+# 个人数据一律在 ~/.ocv;以下防本地遗留或 OCV_ROOT=项目根 时误提交 (personal data is always in ~/.ocv; the following prevents accidental commits of local leftovers or when OCV_ROOT=project root)
+ocv.config.json
+.ocv-state.json
+.ocv.secrets.json
 .wt/
 .run/
 reports/
-.ocv-state.json
-.ocv.secrets.json
