@@ -1,0 +1,39 @@
+name: dist
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mac:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: bun install --frozen-lockfile
+
+      # tag 推送 = 发 Release(zip + latest-mac.yml,客户端据此提示更新);手动跑 = 只打包
+      - name: Package (publish on tag)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          bun run build:renderer
+          if [ "${GITHUB_REF#refs/tags/}" != "$GITHUB_REF" ]; then
+            bunx electron-builder --mac --publish always
+          else
+            bunx electron-builder --mac --publish never
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ocv-mac-arm64
+          path: dist/*.zip
+          if-no-files-found: error
