@@ -1,6 +1,6 @@
 {
   "name": "ocv-agent",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "夜间 feature 分支 OCR 代码审查 + 自动修复 + 提 PR；Electron 控制台",
   "author": "a949066041",
